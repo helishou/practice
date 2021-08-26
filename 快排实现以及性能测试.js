@@ -1,10 +1,10 @@
 /*
  * @Author       : helishou
  * @Date         : 2021-08-25 17:57:35
- * @LastEditTime : 2021-08-26 14:21:41
+ * @LastEditTime : 2021-08-26 15:59:14
  * @LastEditors  : helishou
  * @Description  :
- * @FilePath     : \插曲-测试\快排实现以及性能测试.js
+ * @FilePath     : \快排实现以及性能测试.js
  * 你用你的指尖,阻止我说再见,在bug完全失去之前
  */
 
@@ -45,21 +45,40 @@ const partition = function (arr, L, R, func) {
   return { lt: lt, gt: gt };
 };
 
+// const insertSort = function (arr, L, R, func) {
+//   let temp;
+//   let index;
+//   for (let i = L; i < R; i++) {
+//     temp = arr[i + 1];
+//     index = i;
+//     while (func(arr[index], temp) > 0 && index >= 0) {
+//       arr[index + 1] = arr[index];
+//       index--;
+//     }
+//     arr[index + 1] = temp;
+//   }
+//   // return arr
+// };
 const insertSort = function (arr, L, R, func) {
-  let temp;
-  let index;
-  for (let i = L; i < R; i++) {
-    temp = arr[i + 1];
-    index = i;
-    while (func(arr[index], temp) > 0 && index >= 0) {
-      arr[index + 1] = arr[index];
-      index--;
+  for (var i = L; i < R+1; i++) {
+    var key = arr[i],
+      left = L,
+      right = i - 1;
+    while (left <= right) {
+      var middle = parseInt((left + right) / 2);
+      if (key < arr[middle]) {
+        right = middle - 1;
+      } else {
+        left = middle + 1;
+      }
     }
-    arr[index + 1] = temp;
+    for (var j = i - 1; j >= left; j--) {
+      arr[j + 1] = arr[j];
+    }
+    arr[left] = key;
   }
-  // return arr
+  return arr
 };
-
 const threeWayFastRow = function (arr, L, R, func) {
   // 当前数组的起始位置大于等于数组的末尾位置时退出递归
   if (L >= R) {
@@ -102,26 +121,22 @@ const threeWayFastRowAndInsett = function (arr, L, R, func) {
 let a;
 // console.time('push');
 a = [];
-l = 211;
+l = 10;
 for (i = 0; i < l; i++) {
   a.push(Math.random());
 }
 
 b = [...a];
 c = [...a];
-d = [...a];
-console.time('三路快排');
+console.time("三路快排");
 threeWayFastRow(a, 0, l - 1, (a, b) => a - b);
-
-console.timeEnd('三路快排');
-console.time('三路快排插入');
+console.timeEnd("三路快排");
+console.time("三路快排插入");
 threeWayFastRowAndInsett(b, 0, l - 1, (a, b) => a - b);
+console.timeEnd("三路快排插入");
+// console.time("默认");
+// c.sort((a, b) => {
+//   return a - b;
+// });
 
-console.timeEnd('三路快排插入');
-console.time('默认');
-c.sort((a, b) => {
-  return a - b;
-});
-
-console.timeEnd('默认');
-
+// console.timeEnd("默认");
