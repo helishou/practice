@@ -1,0 +1,52 @@
+<!--
+ * @Author       : helishou
+ * @Date         : 2021-05-19 00:22:26
+ * @LastEditTime : 2021-06-26 23:40:49
+ * @LastEditors  : helishou
+ * @Description  : 
+ * @FilePath     : \插曲-Promise实现\index.html
+ * 你用你的指尖,阻止我说再见,在bug完全失去之前
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Promise-封装</title>
+    <script src="./src/promise.js"></script>
+  </head>
+  <body>
+    <script type="text/javascript">
+      let p = new Promise((resolve, reject) => {
+        setTimeout(()=>{
+          resolve('data')
+        },2000)
+        //抛出异常
+      })
+      console.log(p)
+      p.then(
+        (value) => {
+          console.log(value)
+          return value
+        },
+        (reason) => {
+          console.warn(reason)
+        }
+      ).then(
+        (value) => {
+          console.log('222',value)
+        },
+        (reason) => {
+          console.warn(reason)
+        }
+      )
+      let b=new Promise((r,j)=>{r(111)})
+      let a=new Promise((r,j)=>{
+        r(b)
+        }
+      )   
+      a.then(data=>console.log(data))
+    </script>
+  </body>
+</html>
