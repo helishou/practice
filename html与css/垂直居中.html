@@ -1,0 +1,119 @@
+<!--
+ * @Author       : helishou
+ * @Date         : 2021-08-10 19:11:51
+ * @LastEditTime : 2021-08-23 21:10:51
+ * @LastEditors  : helishou
+ * @Description  : 
+ * @FilePath     : \插曲-测试\html与css\垂直居中.html
+ * 你用你的指尖,阻止我说再见,在bug完全失去之前
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* body{
+            height: 100%;
+            width: 100%;
+        } */
+        /* .parent{
+            position: relative;
+            绝对定位**相对于 static 定位以外的第一个父元素进行定位**
+            width: 100vw;
+            height: 100vh;
+        }
+        .child{
+            absolute生成绝对定位的元素。元素的位置通过 "left", "top", "right" 以及 "bottom" 属性进行规定。
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            background-color: aqua;
+            transform: translate(-50%,-50%);
+        } */
+        /* .parent{
+            line-height: 300px;
+            text-align: center;
+            font-size: 0px;
+            background-color: bisque;
+            width: 300px;
+        }
+        .child{
+            font-size: 16px;
+            display: inline-block;
+            vertical-align: middle;
+            background-color: aqua;
+            line-height: initial;
+            text-align: left;
+        } */
+        /* .parent{
+            兼容性好
+            display: table-cell;
+            text-align: center;
+            vertical-align: middle;
+            height: 500px;
+            width: 500px;
+            background-color: aliceblue;
+        }
+        .parent>.child{
+            display: inline-block;
+        } */
+        /* .parent{
+            移动端推荐，无兼容性要求推荐
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: aliceblue;
+            height: 500px;
+            width: 500px;
+        }
+        .parent>.child{
+        } */
+        /* .parent{
+            display: grid;
+
+            background-color: aliceblue;
+            height: 500px;
+            width: 500px;
+        }
+        .parent>.child{
+            align-self: center;
+            justify-self: center
+        } */
+        .parent{
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: aliceblue;
+            text-align: center;
+            font-size: 0;
+            white-space: nowrap;
+            overflow: auto;
+        }
+        .parent::after{
+            content:'';
+            display: inline-block;
+            height: 100%;
+            vertical-align: middle;
+        }
+        .parent>.child{
+            display: inline-block;
+            font-size: 14px;
+            white-space: normal;
+            vertical-align: middle;
+            text-align: left;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class='parent'>
+        <div class='child'><div style='height: 500;width: 400;'>111</div></div>
+    </div>
+</body>
+</html>

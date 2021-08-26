@@ -1,0 +1,96 @@
+<!--
+ * @Author       : helishou
+ * @Date         : 2021-08-22 21:47:06
+ * @LastEditTime : 2021-08-22 22:54:41
+ * @LastEditors  : helishou
+ * @Description  : 
+ * @FilePath     : \11.html
+ * 你用你的指尖,阻止我说再见,在bug完全失去之前
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .color {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+      }
+      .color input {
+        font-size: 14px;
+        line-height: 1.5;
+        border-radius: 4px;
+        width: 120px;
+        margin-left: 5px;
+        border: 1px solid #efeff4;
+        padding: 5px;
+        outline: 0;
+        resize: none;
+      }
+      .divider {
+        color: #25bb9b;
+        margin: 0 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="color">
+      <span>RGB</span>
+      <input class="rgb" type="text" placeholder="请输入RGB值" />
+      <span class="divider">&lt;=&gt;</span>
+      <span>HEX</span>
+      <input class="hex" type="text" placeholder="请输入HEX值" />
+    </div>
+    <script>
+      const rgb2hex = {
+        init(param) {
+          const that = this;
+          const rgb = param.rgb;
+          const hex = param.hex;
+          if (!rgb || !hex) return;
+          // TODO: 请为rgb绑定blur事件，回调函数为_blurRgb
+          // TODO: 请为hex绑定blur事件，回调函数为_blurHex
+          rgb.onblur = _blurRgb;
+          hex.onblur = _blurHex;
+          function _blurRgb() {
+            // TODO: 获取rgb的值，并将其传参给rgb2hex
+            const value = that.rgb2hex(rgb.value);
+            // TODO: 将value赋值给hex节点
+            hex.value = value;
+          }
+
+          function _blurHex() {
+            // TODO: 获取hex的值，并将其传参给hex2rgb
+            const value = that.hex2rgb(hex.value);
+            // TODO: 将value赋值给rgb节点
+            rgb.value = value;
+          }
+        },
+        rgb2hex(value) {
+          value = (value || "").trim();
+          // TODO: 判断value是否是正确的rgb形式
+          if (false) return "";
+          // TODO: 将value转成16进制形式，并返回；比如 255,255,255 => #FFFFFF
+          return "6666";
+        },
+        hex2rgb(value) {
+          value = (value || "").trim();
+          // TODO: 判断value是否是正确的16进制形式
+          if (false) return "";
+          // TODO: 将value转成rgb形式，并返回；比如 #FFFFFF => 255,255,255
+          return "6666";
+        },
+      };
+      rgb2hex.init({
+        // TODO: 请获取class=rgb的节点
+        rgb: document.querySelector(".rgb"),
+        // TODO: 请获取class=hex的节点
+        hex: document.querySelector(".hex"),
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,71 @@
+<!--
+ * @Author       : helishou
+ * @Date         : 2021-08-11 21:40:18
+ * @LastEditTime : 2021-08-11 22:47:11
+ * @LastEditors  : helishou
+ * @Description  : 
+ * @FilePath     : f:\桌面\front do\Webpack进阶\插曲-测试\html与css\标签切换.html
+ * 你用你的指尖,阻止我说再见,在bug完全失去之前
+-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>用纯CSS3代码实现的tab标签切换</title>
+
+    <style>
+      #tab {
+        width: 310px;
+        height: 200px;
+        border: 1px solid;
+        position: absolute;
+        top: 100px;
+        left: 100px;
+      }
+      ul {
+        list-style: none;
+        padding: 0px;
+        margin: 0px;
+      }
+      ul li {
+        float: left;
+        width: 33.3%;
+      }
+      ul li a {
+        background: #dbc; /*藕粉色*/
+        height: 30px;
+        line-height: 30px;
+        display: block;
+        text-decoration: none; /*去除下划线*/
+        text-align: center; /*文字水平居中*/
+        border-right: 1px solid #eee; /*右边框，浅浅灰*/
+      }
+      #tab > div {
+        border-bottom: 1px solid;
+        width: 100%;
+        height: 170px;
+        position: absolute;
+        top: 31px;
+        background: #fff;
+        text-indent: 2em; /*首行缩进*/
+      }
+      #div1:target,
+      #div2:target,
+      #div3:target {
+        z-index: 1;
+      } /*z-index 属性指定一个元素的堆叠顺序*/
+    </style>
+  </head>
+  <body>
+    <div id="tab">
+      <ul>
+        <li><a href="#div1">标签1</a></li>
+        <li><a href="#div2">标签2</a></li>
+        <li><a href="#div3">标签3</a></li>
+      </ul>
+      <div id="div1">这是标签1的内容：白盒测试和黑盒测试的区别</div>
+      <div id="div2">这是标签2的内容：白盒测试是通过程序的源代码进行测试而不使用用户界面。这种类型的测试需要从代码句法发现内部代码在算法、溢出、路径、条件等中的缺点或错误，进而加以修正。</div>
+      <div id="div3">这是标签3的内容：黑盒测试是通过使用整个软件或某种软件功能来严格进行测试，而并不检查程序的源代码，也不很清楚地了解该软件的源码程序是怎么样设计的。</div>
+    </div>
+  </body>
+</html>

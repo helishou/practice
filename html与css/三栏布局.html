@@ -1,0 +1,197 @@
+<!--
+ * @Author       : helishou
+ * @Date         : 2021-08-10 21:13:26
+ * @LastEditTime : 2021-08-10 21:27:31
+ * @LastEditors  : helishou
+ * @Description  : 
+ * @FilePath     : f:\桌面\front do\Webpack进阶\插曲-测试\html与css\三栏布局.html
+ * 你用你的指尖,阻止我说再见,在bug完全失去之前
+-->
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+        }
+      .box {
+          position: relative;
+      }
+      .left {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 200px;
+          background-color:aquamarine;
+          height: 200px;
+      }
+      .right {
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 200px;
+          height: 200px;
+          background-color:aquamarine;
+      }
+      .middle {
+          margin-left: 200px;
+          margin-right: 200px;
+          height: 200px;
+          background-color:aquamarine;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <div class="left">1</div>
+      <div class="middle">2</div>
+      <div class="right">3</div>
+    </div>
+  </body>
+</html> -->
+
+<!-- <head>
+    <meta charset="UTF-8">
+    <title>圣杯模式</title>
+    <style type="text/css">
+        body {
+            min-width: 800px; /* 设置页面最小宽度*/
+            margin: 0;
+        }
+        .box {
+            padding: 0 200px 0 180px;
+            height: 100px;
+        }
+        .box div:not(.no) {
+            float: left;    /* 所有元素向左浮动*/
+            height: 100px;	/* 统一高度*/
+        }
+        .main {
+            width: 100%;
+        }
+        .left {
+            width: 180px;		/* (1) 挤在main下面*/
+            margin-left: -100%; /* (2) main的最左侧*/
+            /* word-spacing: normal; */
+            word-break: break-all;
+            position: relative;
+            left: -180px;		/* (3) 相对自己左移padding-left:180px的距离*/
+        }
+        .right {
+            width: 200px;		/* (1) 挤在main下面,left的右边*/
+            margin-left: -200px;/* (2) main的最右侧*/
+            position: relative;	
+            right: -200px;		/* (3) 相对自己左移padding-right:200px的距离*/
+        }
+        .no{
+            word-break: unset;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="main">1</div>
+        <div class="left">2222222222222222222222222222222222222
+            <div class='no'>555555555555555558888888888888</div>
+        </div>
+        <div class="right">3</div>
+    </div>
+</body> -->
+<!-- <head>
+    <meta charset="UTF-8">
+    <title>双飞翼模式</title>
+    <style type="text/css">
+        body {
+            min-width: 800px; /* 设置页面最小宽度*/
+            margin: 0;
+        }
+        .main {
+            float: left;
+            height: 100px;
+            width: 100%;
+        }
+        .main-content {
+            margin: 0 200px 0 180px; /* 注释后不影响*/
+            height: 100px;
+        }
+        .left {
+            float: left;
+            height: 100px;
+            width: 180px;
+            margin-left: -100%;
+            background-color: blue;
+        }
+        .right {
+            float: left;
+            height: 100px;
+            width: 200px;
+            margin-left: -200px;
+            background-color: aqua
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="main-content">3</div>
+    </div>
+    <div class="left">1</div>
+    <div class="right">2</div>
+</body> -->
+<!-- <head>
+    <meta charset="UTF-8">
+    <title>flex</title>
+    <style type="text/css">
+        .main {
+            display: flex;
+        }
+        .main-content {
+            flex:1;
+        }
+        .left {
+            width: 180px;
+        }
+        .right {
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="left">1</div>
+        <div class="main-content">3</div>
+        <div class="right">2</div>
+    </div>
+</body> -->
+<head>
+    <meta charset="UTF-8">
+    <title>flex上中下</title>
+    <style type="text/css">
+        .main {
+            position: relative;
+            display: flex;
+            height: 100%;
+            flex-direction: column;
+        }
+        .main-content {
+            /* overflow: hidden; */
+            flex:1;
+        }
+        .left {
+           height: 100px;
+        }
+        .right {
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="left">1</div>
+        <div class="main-content">3</div>
+        <div class="right">2</div>
+    </div>
+</body>

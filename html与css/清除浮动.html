@@ -1,0 +1,44 @@
+<!--
+ * @Author       : helishou
+ * @Date         : 2021-08-10 21:39:49
+ * @LastEditTime : 2021-08-10 21:28:39
+ * @LastEditors  : helishou
+ * @Description  : 
+ * @FilePath     : f:\桌面\front do\Webpack进阶\插曲-测试\html与css\清除浮动.html
+ * 你用你的指尖,阻止我说再见,在bug完全失去之前
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .parent{
+            background-color: beige;
+        }
+        .parent::before{
+            clear: both;
+        }
+        .float{
+            width: 50px;
+            float: left;
+            word-break: break-all;
+            word-wrap: break-word;
+            background-color: aliceblue;
+        }
+        .clear{
+            clear: both;
+        }
+        </style>
+</head>
+<body>
+    <div class='parent'>
+        <div class='float'>
+            111111111111111111111111
+        </div>
+        <div class='clear'></div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!--
+ * @Author       : helishou
+ * @Date         : 2021-08-05 20:45:54
+ * @LastEditTime : 2021-08-10 21:23:48
+ * @LastEditors  : helishou
+ * @Description  : 
+ * @FilePath     : f:\桌面\front do\Webpack进阶\插曲-测试\html与css\画图形.html
+ * 你用你的指尖,阻止我说再见,在bug完全失去之前
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .squre::after {
+        content: '';
+        display: block;
+        padding-top: 100%;
+      }
+      .round {
+        width: 0;
+        height: 0;
+        border-width: 100px;
+        border-style: solid;
+        border-color: red transparent transparent transparent; /* border-color: red;*/ /*扇形*/
+        /* border-radius: 100%; 圆形 */
+      }
+      .sanjiao {
+        width: 0;
+        height: 0;
+        border: 50px solid transparent;
+        border-bottom-color: red;
+      }
+      /* span {
+          content:'';
+          display:block;
+          padding-top:100%
+      } */
+    </style>
+  </head>
+  <body>
+    <div class="squre" style="width: 50vw; background-color: aqua">
+      <span></span>
+    </div>
+    <div class="sanjiao"></div>
+    <div class="round"></div>
+    <!-- <div style='padding-top: 50%;width: 50vw;background-color: aqua;'></div> -->
+  </body>
+</html>
