@@ -1,7 +1,7 @@
 /*
  * @Author       : helishou
  * @Date         : 2021-08-25 17:57:35
- * @LastEditTime : 2021-08-26 15:59:14
+ * @LastEditTime : 2021-08-27 15:06:50
  * @LastEditors  : helishou
  * @Description  :
  * @FilePath     : \快排实现以及性能测试.js
@@ -22,7 +22,7 @@ const partition = function (arr, L, R, func) {
   let lt = L;
   // 右区间的初始值: R+1
   let gt = R + 1;
-  for (let i = L + 1; i < gt; ) {
+  for (var i = L + 1; i < gt; ) {
     if (func(arr[i], p) === 0) {
       // 当前i指向的元素等于p
       i++;
@@ -121,7 +121,7 @@ const threeWayFastRowAndInsett = function (arr, L, R, func) {
 let a;
 // console.time('push');
 a = [];
-l = 10;
+l = 1000000;
 for (i = 0; i < l; i++) {
   a.push(Math.random());
 }
@@ -134,9 +134,9 @@ console.timeEnd("三路快排");
 console.time("三路快排插入");
 threeWayFastRowAndInsett(b, 0, l - 1, (a, b) => a - b);
 console.timeEnd("三路快排插入");
-// console.time("默认");
-// c.sort((a, b) => {
-//   return a - b;
-// });
+console.time("默认");
+c.sort((a, b) => {
+  return a - b;
+});
 
-// console.timeEnd("默认");
+console.timeEnd("默认");

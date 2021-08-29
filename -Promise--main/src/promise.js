@@ -4,10 +4,10 @@
 /*
  * @Author       : helishou
  * @Date         : 2021-05-19 00:25:57
- * @LastEditTime : 2021-08-17 20:40:38
+ * @LastEditTime : 2021-08-27 18:00:54
  * @LastEditors  : helishou
  * @Description  : 最终版，实现promise静态方法和其他方法
- * @FilePath     : \插曲-Promise实现\src\promise.js
+ * @FilePath     : \-Promise--main\src\promise.js
  * 你用你的指尖,阻止我说再见,在bug完全失去之前
  */
 const resolvePromise = (promise2, result, resolve, reject) => {
@@ -270,7 +270,6 @@ Promise.any = function(promiseArr) {
       promiseArr.forEach((p, i) => {
           Promise.resolve(p).then(val => {
               resolve(val)
-              
           }, err => {
               index++
               if (index === promiseArr.length) {
