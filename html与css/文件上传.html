@@ -1,9 +1,54 @@
 <!--
  * @Author       : helishou
  * @Date         : 2021-08-29 22:09:13
- * @LastEditTime : 2021-08-29 22:09:14
+ * @LastEditTime : 2021-08-29 22:27:39
  * @LastEditors  : helishou
  * @Description  : 
  * @FilePath     : \html与css\文件上传.html
  * 你用你的指尖,阻止我说再见,在bug完全失去之前
 -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form method="dialog" action="111" enctype="multipart/form-data">
+      <input type="file" id="f1" /><br /><br /><br />
+      <button type="button" id="bt">上传</button>
+    </form>
+    <script>
+      function onSubmit() {
+        console.log("1111111");
+        let fileList = document.querySelector("#f1").files;
+        console.log(fileList)
+        var fd = new FormData();
+        fd.append("title", "上传");
+        for (var i = 0; i < fileList.length; i++) {
+          fd.append("f1", fileList[i]); //支持多文件上传
+        }
+        var xhr = new XMLHttpRequest(); //创建对象
+        xhr.open("POST", "http://localhost:8100/", true);
+        xhr.send(fd); //发送时  Content-Type默认就是: multipart/form-data;
+        xhr.onreadystatechange = function () {
+          console.log("state change", xhr.readyState);
+          if (this.readyState == 4 && this.status == 200) {
+            var obj = JSON.parse(xhr.responseText); //返回值
+            console.log(obj);
+            if (obj.fileUrl.length) {
+              alert("上传成功");
+            } else {
+              alert("上传失败");
+            }
+          }
+        };
+      }
+      let btn = document.querySelector("#bt");
+      console.log(btn);
+      btn.addEventListener("click", onSubmit);
+    </script>
+  </body>
+</html>
