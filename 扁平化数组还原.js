@@ -1,7 +1,7 @@
 /*
  * @Author       : helishou
  * @Date         : 2021-08-23 17:04:39
- * @LastEditTime : 2021-08-30 11:30:08
+ * @LastEditTime : 2021-08-30 11:31:15
  * @LastEditors  : helishou
  * @Description  :
  * @FilePath     : \扁平化数组还原.js
@@ -25,4 +25,4 @@ data.forEach(function (node) {
     tree.push(node);
   }
 });
-console.log(tree);
+console.log(JSON.stringify(tree));

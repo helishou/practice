@@ -1,0 +1,50 @@
+<!--
+ * @Author       : helishou
+ * @Date         : 2021-08-30 14:24:46
+ * @LastEditTime : 2021-08-30 14:34:10
+ * @LastEditors  : helishou
+ * @Description  : 
+ * @FilePath     : \html与css\css旋转.html
+ * 你用你的指尖,阻止我说再见,在bug完全失去之前
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      div {
+        width: 200px;
+        height: 200px;
+        border: 1px solid pink;
+        margin: 100px auto;
+        /* overflow: hidden; */
+      }
+
+      div::before {
+        content: "AA";
+        display: block;
+        width: 100%;
+        height: 100%;
+        font-size: 40px;
+        background-color: hotpink;
+        /*transform-origin: left bottom;*/
+        animation: rotate 3s linear infinite;
+      }
+      @keyframes rotate {
+        from {
+          transform: rotate(360deg) translate(100%);
+        }
+        to {
+          transform: rotate(0deg) translate(100%);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div>6666</div>
+  </body>
+</html>
