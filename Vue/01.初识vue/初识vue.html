@@ -1,0 +1,43 @@
+<!--
+ * @Author       : helishou
+ * @Date         : 2021-09-07 22:20:10
+ * @LastEditTime : 2021-09-07 22:44:37
+ * @LastEditors  : helishou
+ * @Description  : 
+ * @FilePath     : \Vue\01.初识vue\初识vue.html
+ * 你用你的指尖,阻止我说再见,在bug完全失去之前
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>初识vue</title>
+    <!-- 引入Vue -->
+    <script type="text/javascript" src="../js/vue.js"></script>
+  </head>
+  <body>
+    <!-- 
+        初识Vue：
+        1.想让vue工作，就要创建一个Vue实例，且要传入一个配置对象
+        2.root容器里的代码依然符合html规范，只不过混入了一些特殊的vueyvfa
+        3.root容器里的代码被称为Vue模板
+     -->
+    <!-- 准备好容器 -->
+    <div id="root">
+      <h1>Hello,{{name}},{{age}}</h1>
+    </div>
+    <script>
+      Vue.config.productionTip = false;
+      //创建实例
+      new Vue({
+        el: "#root",
+        data: {
+          name: "WXY",
+          age: "24",
+        },
+      });
+    </script>
+  </body>
+</html>

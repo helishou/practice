@@ -1,0 +1,60 @@
+<!--
+ * @Author       : helishou
+ * @Date         : 2021-09-07 22:20:10
+ * @LastEditTime : 2021-09-08 00:06:47
+ * @LastEditors  : helishou
+ * @Description  : 
+ * @FilePath     : \Vue\04.el与data的两种写法\index.html
+ * 你用你的指尖,阻止我说再见,在bug完全失去之前
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>第二种写法</title>
+    <!-- 引入Vue -->
+    <script type="text/javascript" src="../js/vue.js"></script>
+  </head>
+  <body>
+    <!-- 
+        Vue种有两种数据绑定方式
+        1.单项绑定  v-bind
+        2.双向绑定  v-model
+     -->
+    <!-- 准备好容器 -->
+    <div id="root">
+      <h1>Hello,{{name}},{{age}}</h1>
+      <h1>Hello,{{name}},{{age}}</h1>
+      <h1>Hello,{{name}},{{age}}</h1>
+      <hr />
+      <!-- 只能用在输入类元素 -->
+      <input v-model="name" />
+    </div>
+    <script>
+      // Vue.config.productionTip = false;
+      //创建实例
+      const vm = new Vue({
+        // el: "#root",
+        // data: function() {
+        //   console.log('111',this);
+        //   return {
+        //     name: "WXY",
+        //     age: "24",
+        //     url: '"https://wangxinyang.xyz"',
+        //   };
+        // },
+        data() {
+          console.log('111',this);
+          return {
+            name: "WXY",
+            age: "24",
+            url: '"https://wangxinyang.xyz"',
+          };
+        },
+      });
+      vm.$mount("#root"); //第二章写法
+    </script>
+  </body>
+</html>

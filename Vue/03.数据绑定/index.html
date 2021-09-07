@@ -1,0 +1,48 @@
+<!--
+ * @Author       : helishou
+ * @Date         : 2021-09-07 22:20:10
+ * @LastEditTime : 2021-09-07 23:56:05
+ * @LastEditors  : helishou
+ * @Description  : 
+ * @FilePath     : \Vue\03.数据绑定\index.html
+ * 你用你的指尖,阻止我说再见,在bug完全失去之前
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数据绑定</title>
+    <!-- 引入Vue -->
+    <script type="text/javascript" src="../js/vue.js"></script>
+  </head>
+  <body>
+    <!-- 
+        Vue种有两种数据绑定方式
+        1.单项绑定  v-bind
+        2.双向绑定  v-model
+     -->
+    <!-- 准备好容器 -->
+    <div id="root">
+      <h1>Hello,{{name}},{{age}}</h1>
+      <h1>Hello,{{name}},{{age}}</h1>
+      <h1>Hello,{{name}},{{age}}</h1>
+      <hr/>
+      <!-- 只能用在输入类元素 -->
+      <input v-model='name'>
+    </div>
+    <script>
+      Vue.config.productionTip = false;
+      //创建实例
+      new Vue({
+        el: "#root",
+        data: {
+          name: "WXY",
+          age: "24",
+          url:'"https://wangxinyang.xyz"'
+        },
+      });
+    </script>
+  </body>
+</html>
