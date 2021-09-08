@@ -4,10 +4,11 @@
 /*
  * @Author       : helishou
  * @Date         : 2021-05-19 00:25:57
- * @LastEditTime : 2021-08-27 18:00:54
+ * @LastEditTime : 2021-09-08 10:13:53
  * @LastEditors  : helishou
  * @Description  : 最终版，实现promise静态方法和其他方法
- * @FilePath     : \-Promise--main\src\promise.js
+ * Js引擎为了让microtask尽快的输出，做了一些优化，连续的多个then(3个)如果没有reject或者resolve会交替执行then而不至于让一个堵太久完成用户无响应，不单单v8这样其他引擎也是这样，因为其实promuse内部状态已经结束了
+ * @FilePath     : d:\desk\sakura\practice\-Promise--main\src\promise.js
  * 你用你的指尖,阻止我说再见,在bug完全失去之前
  */
 const resolvePromise = (promise2, result, resolve, reject) => {
@@ -15,6 +16,7 @@ const resolvePromise = (promise2, result, resolve, reject) => {
   if (result === promise2) {
     reject(new TypeError('error due to circular reference'));
   }
+  // result=Promise.resolve(result)
   // 判断是否执行过onreject或者onresolve
   let consumed = false;
   // 判断有无then属性方法，有的话就是thenable
