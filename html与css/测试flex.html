@@ -1,7 +1,7 @@
 <!--
  * @Author       : helishou
  * @Date         : 2021-09-09 09:27:07
- * @LastEditTime : 2021-09-09 09:56:04
+ * @LastEditTime : 2021-09-09 15:49:25
  * @LastEditors  : helishou
  * @Description  : 
  * @FilePath     : d:\desk\sakura\practice\html与css\测试flex.html
@@ -16,15 +16,23 @@
     <title>Document</title>
     <style>
       .container {
+        padding: 0;
+        margin: 0;
+        font-size: 0;
         /* display: flex;
         flex-wrap: wrap; */
-        display: grid;
-        grid-template-columns: 4;
-        grid-template-rows: 2;
+        /* display: grid;
+        grid-template-columns: repeat(4,25%);
+        grid-template-rows: repeat(2,50%);
         width: 100%;
-        height: 500px;
+        height: 500px; */
       }
       .item {
+        display: inline-block;
+        width: 25%;
+        box-sizing: border-box;
+        font-size: 14px;
+        /* float: left; */
         /* width: 10%;
         max-width: 10%;
         min-width: 100%; */
@@ -32,11 +40,14 @@
         /* flex-grow: 0;  */
         /* flex: 0 0 25%; */
       }
+      /* .item::after{
+        content:attr(child)
+      } */
       .item:nth-of-type(odd) {
-        background: #ff0000;
+        background: pink;
       }
       .item:nth-of-type(even) {
-        background: #0000ff;
+        background: cornsilk;
       }
     </style>
   </head>
@@ -49,7 +60,7 @@
       <div class="item">5</div>
       <div class="item">6</div>
       <div class="item">7</div>
-      <div class="item">8</div>
+      <!-- <div class="item">8</div> -->
     </div>
   </body>
 </html>
