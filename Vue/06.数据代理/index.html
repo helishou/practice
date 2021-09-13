@@ -1,0 +1,51 @@
+<!--
+ * @Author       : helishou
+ * @Date         : 2021-09-07 22:20:10
+ * @LastEditTime : 2021-09-13 23:23:09
+ * @LastEditors  : helishou
+ * @Description  : 
+ * @FilePath     : \Vue\06.数据代理\index.html
+ * 你用你的指尖,阻止我说再见,在bug完全失去之前
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MVVM</title>
+    <!-- 引入Vue -->
+    <script type="text/javascript" src="../js/vue.js"></script>
+  </head>
+  <body>
+    <!-- 
+        Vue种有两种数据绑定方式
+        1.单项绑定  v-bind
+        2.双向绑定  v-model
+     -->
+    <!-- 准备好容器 -->
+    <div id="root">
+      <h1>Hello,{{_data.name}},{{_data.age}}</h1>
+      <input v-model="name" />
+      <button @click='click(6666,$event)'>点我提醒信息</button>
+    </div>
+    <script>
+      // 将_data数据代理到vm实例上
+      const vm = new Vue({
+        data() {
+          return {
+            name: "WXY",
+            age: "24",
+            url: '"https://wangxinyang.xyz"',
+          };
+        },
+        methods: {
+          click(number,event) {
+            console.log(event.target.innerText);
+          },
+        },
+      });
+      vm.$mount("#root"); //第二章写法
+    </script>
+  </body>
+</html>

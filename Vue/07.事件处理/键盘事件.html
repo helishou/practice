@@ -1,0 +1,59 @@
+<!--
+ * @Author       : helishou
+ * @Date         : 2021-09-07 22:20:10
+ * @LastEditTime : 2021-09-14 00:30:15
+ * @LastEditors  : helishou
+ * @Description  : 
+ * @FilePath     : \Vue\07.事件处理\键盘事件.html
+ * 你用你的指尖,阻止我说再见,在bug完全失去之前
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>键盘事件</title>
+    <!-- 引入Vue -->
+    <script type="text/javascript" src="../js/vue.js"></script>
+  </head>
+  <body>
+    <!-- 
+        right
+        spce 
+        delete
+        tab
+        caps-lock
+        特殊的键
+        ctrl，alt，shift，meta
+        配合keyup 按下修饰键，按其他键，释放其他建，才开始
+     -->
+    <!-- 准备好容器 -->
+    <div id="root">
+      <h1>Hello,{{_data.name}},{{_data.age}}</h1>
+      <input v-model="name" />
+      <input @keydown.enter='keydown'>点我提醒信息，捕获</button>
+      <input @keydown.ctrl.y='keydown'>点我提醒信息，捕获</button>
+    </div>
+    <script>
+      // 将_data数据代理到vm实例上
+      Vue.config.keyCodes.huiche=13//自定义按键
+      const vm = new Vue({
+        data() {
+          return {
+            name: "WXY",
+            age: "24",
+            url: '"https://wangxinyang.xyz"',
+          };
+        },
+        methods: {
+          keydown(event) {
+              console.log(event.key,event.keyCode)//不建议用keyCode了
+            console.log(event.target.value);
+          },
+        },
+      });
+      vm.$mount("#root"); //第二章写法
+    </script>
+  </body>
+</html>

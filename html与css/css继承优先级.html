@@ -1,0 +1,36 @@
+<!--
+ * @Author       : helishou
+ * @Date         : 2021-09-11 20:20:09
+ * @LastEditTime : 2021-09-11 20:24:17
+ * @LastEditors  : helishou
+ * @Description  : 
+ * @FilePath     : \html与css\css继承优先级.html
+ * 你用你的指尖,阻止我说再见,在bug完全失去之前
+-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>继承性练习</title>
+    <style type="text/css">
+	  .f{
+		color: pink;
+	  }
+      p[i]{
+        color: blue;
+        border: 10px #33cccc solid;
+      }
+      p {
+        color: #f00;
+        border: 10px #33cccc solid;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <p i='111' class='f' id='d'>我是段落1</p>
+      <p>我是段落2</p>
+      <p>我是段落3</p>
+    </div>
+  </body>
+</html>
