@@ -1,0 +1,92 @@
+<!--
+ * @Author       : helishou
+ * @Date         : 2021-09-14 18:43:36
+ * @LastEditTime : 2021-09-15 00:18:56
+ * @LastEditors  : helishou
+ * @Description  : 
+ * @FilePath     : \Vue\09.监视属性\监视属性.html
+ * 你用你的指尖,阻止我说再见,在bug完全失去之前
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>切换天气</title>
+    <!-- 引入Vue -->
+    <style></style>
+    <script type="text/javascript" src="../js/vue.js"></script>
+  </head>
+  <body>
+    <!-- 
+        Vue原则
+        1.vm管理的函数都写成普通函数
+        2.其他函数最好写成箭头函数
+     -->
+    <!-- 准备好容器 -->
+    <div id="root">
+      <h2>今天天气真{{weather}}</h2>
+      <button @click="click">切换天气</button>
+      <button @click="click2">切换number</button>
+    </div>
+    <script>
+      // 将_data数据代理到vm实例上
+      const vm = new Vue({
+        data() {
+          return {
+            isHot: true,
+            number: {
+              a: 1,
+            },
+          };
+        },
+        computed: {
+          weather() {
+            return this.isHot ? "炎热" : "凉爽";
+          },
+        },
+        methods: {
+          click() {
+            this.isHot = !this.isHot;
+          },
+          click2() {
+            this.number.a = this.number.a + 1;
+          },
+        },
+        watch: {
+          // 'number':{
+          //   immediate:true,
+          //   deep:true,
+          //   handler(newValue,oldValue){
+          //     console.log('number被改了',newValue,oldValue)
+          //   }
+          // }
+          number(newValue, oldValue) {
+            //简写
+            console.log("number被改了", newValue, oldValue);
+          },
+        },
+      });
+      vm.$mount("#root"); //第二章写法
+      // vm.$watch(
+      //   "weather",
+      //   function (newValue, oldValue) {
+      //     console.log("isHot被改了", newValue, oldValue);
+      //   },
+      //   {
+      //     deep: true,
+      //     immediate: true,
+      //   }
+      // );
+      vm.$watch(
+        "weather",
+        function (newValue, oldValue) {
+          //简写
+          console.log("isHot被改了", newValue, oldValue);
+        },
+      );
+      
+    </script>
+  </body>
+</html>

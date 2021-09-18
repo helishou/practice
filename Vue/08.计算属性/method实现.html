@@ -1,0 +1,60 @@
+<!--
+ * @Author       : helishou
+ * @Date         : 2021-09-07 22:20:10
+ * @LastEditTime : 2021-09-14 18:05:15
+ * @LastEditors  : helishou
+ * @Description  : 
+ * @FilePath     : \Vue\08.计算属性与监视\method实现.html
+ * 你用你的指尖,阻止我说再见,在bug完全失去之前
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>姓名案例</title>
+    <!-- 引入Vue -->
+    <style></style>
+    <script type="text/javascript" src="../js/vue.js"></script>
+  </head>
+  <body>
+    <!-- 
+        Vue事件修饰符
+        1.prevent 阻止默认事件
+        2.stop  阻止事件冒泡
+        3.once 只触发一次
+        4.capture 捕获模式
+        5.self 只有event.target是当前操作的元素才触发事件
+        6.passive 事件默认立即执行，无需等待回调
+     -->
+    <!-- 准备好容器 -->
+    <div id="root">
+      姓<input type="text" v-model='firstName'><br>
+      名<input type="text" v-model='lastName'><br>
+      姓名:<span>{{demo()}}{{lastName}}</span>
+    </div>
+    <script>
+      // 将_data数据代理到vm实例上
+      const vm = new Vue({
+        data() {
+          return {
+            firstName:'张',
+            lastName:'三'
+          };
+        },
+        methods: {
+          click(number,event) {
+            console.log(number)
+            console.log(event.target.innerText);
+            
+          },
+          demo(){
+            return this.firstName+this.lastName
+          }
+        },
+      });
+      vm.$mount("#root"); //第二章写法
+    </script>
+  </body>
+</html>
