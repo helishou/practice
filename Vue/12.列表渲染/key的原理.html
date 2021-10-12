@@ -1,10 +1,10 @@
 <!--
  * @Author       : helishou
- * @Date         : 2021-09-16 16:51:24
- * @LastEditTime : 2021-10-04 15:44:20
+ * @Date         : 2021-10-04 15:45:40
+ * @LastEditTime : 2021-10-04 17:20:27
  * @LastEditors  : helishou
  * @Description  : 
- * @FilePath     : \Vue\12.列表渲染\index.html
+ * @FilePath     : \Vue\12.列表渲染\key的原理.html
  * 你用你的指尖,阻止我说再见,在bug完全失去之前
 -->
 <!DOCTYPE html>
@@ -33,15 +33,9 @@
      -->
     <!-- 准备好容器 -->
     <div id="root">
-        <button @click='n++'>点我加一</button>
+        <button @click='add'>点我加一</button>
         <!-- 遍历数组 -->
-      <li v-for='(item,index) in array' :key='item'>{{index}}-{{item}}</li>
-      <!-- 遍历object -->
-      <li v-for='(value,key) in object' :key='key'>{{key}}-{{value}}</li>
-      <!-- 遍历字符串 -->
-      <li v-for='(char,index) in a' :key='index'>{{char}}-{{index}}</li>
-      <!-- 遍历数字 -->
-      <li v-for='(number,index) in 5' :key='index'>{{number}}-{{index}}</li>
+      <li v-for='(item,index) in array' key='item'>{{index}}-{{item}}<input></input></li>
     </div>
     <script>
       // 将_data数据代理到vm实例上
@@ -66,21 +60,9 @@
           },
         },
         methods: {
-          click() {
-            this.a = "innormal";
-          },
-        },
-        watch: {
-          // 'number':{
-          //   immediate:true,
-          //   deep:true,
-          //   handler(newValue,oldValue){
-          //     console.log('number被改了',newValue,oldValue)
-          //   }
-          // }
-          number(newValue, oldValue) {
-            //简写
-            console.log("number被改了", newValue, oldValue);
+          add() {
+            // this.array.unshift('老刘');
+            this.array.push('老刘');
           },
         },
       });
