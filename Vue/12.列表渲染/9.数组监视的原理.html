@@ -1,0 +1,73 @@
+<!--
+ * @Author       : helishou
+ * @Date         : 2021-10-12 23:58:19
+ * @LastEditTime : 2021-10-13 00:05:01
+ * @LastEditors  : helishou
+ * @Description  : 
+ * @FilePath     : \Vue\12.列表渲染\9.数组监视的原理.html
+ * 你用你的指尖,阻止我说再见,在bug完全失去之前
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>列表过滤</title>
+    <!-- 引入Vue -->
+    <style>
+      .normal {
+        background-color: aqua;
+      }
+      .innormal {
+        background-color: blueviolet;
+      }
+    </style>
+    <script type="text/javascript" src="../js/vue.js"></script>
+  </head>
+  <body>
+    <!-- 
+        Vue原则
+        1.vm管理的函数都写成普通函数
+        2.其他函数最好写成箭头函数
+     -->
+    <!-- 准备好容器 -->
+    <div id="root">
+      <button @click="updateMdm">更新马冬梅</button>
+      <!-- 遍历数组 -->
+      <li v-for="(item,index) in hobby" :key="index">
+        {{item}}
+      </li>
+    </div>
+    <script>
+      // 用compute实现
+      const vm = new Vue({
+        data() {
+          return {
+            hobby:['喝酒','抽烟','烫头']
+          };
+        },
+        methods: {
+          updateMdm() {
+            //push,pop,shift,unshift,splice,sort,reverse
+            this.hobby.reverse()
+          },
+        },
+        computed: {
+        },
+        // watch: {
+        //   keyword: {
+        //     immediate: true,
+        //     // deep:true,
+        //     handler(newValue, oldValue) {
+        //       this.list = this.persons.filter((p) => {
+        //         return p.name.indexOf(newValue) != -1;
+        //       });
+        //     },
+        //   },
+        // },
+      });
+      vm.$mount("#root"); //第二章写法
+    </script>
+  </body>
+</html>

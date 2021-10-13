@@ -1,0 +1,91 @@
+<!--
+ * @Author       : helishou
+ * @Date         : 2021-10-12 23:58:19
+ * @LastEditTime : 2021-10-13 22:37:03
+ * @LastEditors  : helishou
+ * @Description  : 
+ * @FilePath     : \Vue\013.收集表单数据\index.html
+ * 你用你的指尖,阻止我说再见,在bug完全失去之前
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>手机表单</title>
+    <!-- 引入Vue -->
+    <style>
+      .normal {
+        background-color: aqua;
+      }
+      .innormal {
+        background-color: blueviolet;
+      }
+    </style>
+    <script type="text/javascript" src="../js/vue.js"></script>
+  </head>
+  <body>
+<!-- text 收集value值 -->
+    <div id="root">
+      <form @submit.prevent='demo'>
+        账号:<input type="text" v-model="account" /><br /><br />密码:<input
+          type="text"
+          v-model="password"
+        /><br /><br />性别:男<input type="radio" name="sex" v-model='sex' value='male'/>女<input
+          type="radio"
+          name="sex" v-model='sex' value='female'
+        />
+        <br />
+        <br />
+        爱好: 学习<input type="checkbox" v-model='hobby' value='game'/> 打游戏<input type="checkbox" v-model='hobby' value='study'/>
+        吃饭<input type="checkbox" v-model='hobby' value='eat'/><br />
+        <br />
+        所属校区
+        <select name="" id="" v-model='city'>
+          <option value="">请选择校区</option>
+          <option value="beijing">北京</option>
+          <option value="shanghai">上海</option></select
+        ><br />
+        <br />
+        其他信息
+        <textarea name="" id="" cols="30" rows="10" v-model='other'></textarea>
+        <br /><br />
+        <input type="checkbox" v-model='agree'/>阅读并接受<a>用户协议</a>
+        <button>提交</button>
+      </form>
+    </div>
+    <script>
+      // 用compute实现
+      const vm = new Vue({
+        data() {
+          return {
+            password: "",
+            account: "",
+            sex:'',
+            hobby:[],
+            agree:false,city:'',other:''
+          };
+        },
+        methods: {
+          demo(){
+              console.log(this._data)
+          }
+        },
+        computed: {},
+        // watch: {
+        //   keyword: {
+        //     immediate: true,
+        //     // deep:true,
+        //     handler(newValue, oldValue) {
+        //       this.list = this.persons.filter((p) => {
+        //         return p.name.indexOf(newValue) != -1;
+        //       });
+        //     },
+        //   },
+        // },
+      });
+      vm.$mount("#root"); //第二章写法
+    </script>
+  </body>
+</html>
