@@ -1,10 +1,10 @@
 /*
  * @Author       : helishou
  * @Date         : 2021-09-18 09:11:40
- * @LastEditTime : 2021-09-18 09:40:43
+ * @LastEditTime : 2021-10-14 14:27:50
  * @LastEditors  : helishou
  * @Description  :
- * @FilePath     : \print\practice\promisify.js
+ * @FilePath     : d:\desk\sakura\practice\promisify.js
  * 你用你的指尖,阻止我说再见,在bug完全失去之前
  */
 const promisify = (fnc,ctx) => {
