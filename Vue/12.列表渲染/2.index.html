@@ -1,0 +1,104 @@
+<!--
+ * @Author       : helishou
+ * @Date         : 2021-09-16 16:51:24
+ * @LastEditTime : 2021-10-04 15:44:20
+ * @LastEditors  : helishou
+ * @Description  : 
+ * @FilePath     : \Vue\12.列表渲染\index.html
+ * 你用你的指尖,阻止我说再见,在bug完全失去之前
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>切换天气</title>
+    <!-- 引入Vue -->
+    <style>
+      .normal {
+        background-color: aqua;
+      }
+      .innormal {
+        background-color: blueviolet;
+      }
+    </style>
+    <script type="text/javascript" src="../js/vue.js"></script>
+  </head>
+  <body>
+    <!-- 
+        Vue原则
+        1.vm管理的函数都写成普通函数
+        2.其他函数最好写成箭头函数
+     -->
+    <!-- 准备好容器 -->
+    <div id="root">
+        <button @click='n++'>点我加一</button>
+        <!-- 遍历数组 -->
+      <li v-for='(item,index) in array' :key='item'>{{index}}-{{item}}</li>
+      <!-- 遍历object -->
+      <li v-for='(value,key) in object' :key='key'>{{key}}-{{value}}</li>
+      <!-- 遍历字符串 -->
+      <li v-for='(char,index) in a' :key='index'>{{char}}-{{index}}</li>
+      <!-- 遍历数字 -->
+      <li v-for='(number,index) in 5' :key='index'>{{number}}-{{index}}</li>
+    </div>
+    <script>
+      // 将_data数据代理到vm实例上
+      const vm = new Vue({
+        data() {
+          return {
+            n: 1,
+            a: "normal",
+            array: ["normal", "innormal"],
+            object: {
+              normal: true,
+              innormal: false,
+            },
+            styleObj: {
+              fontSize: "40px",
+            },
+          };
+        },
+        computed: {
+          weather() {
+            return this.isHot ? "炎热" : "凉爽";
+          },
+        },
+        methods: {
+          click() {
+            this.a = "innormal";
+          },
+        },
+        watch: {
+          // 'number':{
+          //   immediate:true,
+          //   deep:true,
+          //   handler(newValue,oldValue){
+          //     console.log('number被改了',newValue,oldValue)
+          //   }
+          // }
+          number(newValue, oldValue) {
+            //简写
+            console.log("number被改了", newValue, oldValue);
+          },
+        },
+      });
+      vm.$mount("#root"); //第二章写法
+      // vm.$watch(
+      //   "weather",
+      //   function (newValue, oldValue) {
+      //     console.log("isHot被改了", newValue, oldValue);
+      //   },
+      //   {
+      //     deep: true,
+      //     immediate: true,
+      //   }
+      // );
+      vm.$watch("weather", function (newValue, oldValue) {
+        //简写
+        console.log("isHot被改了", newValue, oldValue);
+      });
+    </script>
+  </body>
+</html>

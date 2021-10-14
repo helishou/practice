@@ -1,0 +1,111 @@
+<!--
+ * @Author       : helishou
+ * @Date         : 2021-09-16 16:51:24
+ * @LastEditTime : 2021-10-12 23:57:35
+ * @LastEditors  : helishou
+ * @Description  : 
+ * @FilePath     : \Vue\12.列表渲染\6.监视的原理.html
+ * 你用你的指尖,阻止我说再见,在bug完全失去之前
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>列表过滤</title>
+    <!-- 引入Vue -->
+    <style>
+      .normal {
+        background-color: aqua;
+      }
+      .innormal {
+        background-color: blueviolet;
+      }
+    </style>
+    <script type="text/javascript" src="../js/vue.js"></script>
+  </head>
+  <body>
+    <!-- 
+        Vue原则
+        1.vm管理的函数都写成普通函数
+        2.其他函数最好写成箭头函数
+     -->
+    <!-- 准备好容器 -->
+    <div id="root">
+      <button @click="updateMdm">更新马冬梅</button>
+      <!-- 遍历数组 -->
+      <li v-for="(item,index) in list" :key="item.id">
+        {{item.name}}-{{item.age}}-{{item.sex}}
+      </li>
+    </div>
+    <script>
+      // 用compute实现
+      const vm = new Vue({
+        data() {
+          return {
+            keyword: "",
+            persons: [
+              { id: "001", name: "马冬梅", age: 19, sex: "女" },
+              { id: "002", name: "周冬雨", age: 19, sex: "女" },
+              { id: "003", name: "温兆伦", age: 21, sex: "男" },
+              { id: "004", name: "周杰伦", age: 22, sex: "男" },
+              { id: "005", name: "马天宇", age: 23, sex: "男" },
+            ],
+            // list: [],
+          };
+        },
+        methods: {
+          updateMdm() {
+            //有效
+            // this.persons[0].name='马老师'
+            // this.persons[0].sex='男'
+            // this.persons[0].age='50'
+            //无效
+            // this.persons[0]={ id: "001", name: "马老师", age: 50, sex: "男"}
+            // 有效
+            Vue.set(this.persons, 0, {
+              id: "001",
+              name: "马老师",
+              age: 50,
+              sex: "男",
+            });
+          },
+        },
+        computed: {
+          list() {
+            return this.persons.filter((p) => {
+              return p.name.indexOf(this.keyword) != -1;
+            });
+          },
+        },
+        // watch: {
+        //   keyword: {
+        //     immediate: true,
+        //     // deep:true,
+        //     handler(newValue, oldValue) {
+        //       this.list = this.persons.filter((p) => {
+        //         return p.name.indexOf(newValue) != -1;
+        //       });
+        //     },
+        //   },
+        // },
+      });
+      vm.$mount("#root"); //第二章写法
+      // vm.$watch(
+      //   "weather",
+      //   function (newValue, oldValue) {
+      //     console.log("isHot被改了", newValue, oldValue);
+      //   },
+      //   {
+      //     deep: true,
+      //     immediate: true,
+      //   }
+      // );
+      vm.$watch("weather", function (newValue, oldValue) {
+        //简写
+        console.log("isHot被改了", newValue, oldValue);
+      });
+    </script>
+  </body>
+</html>

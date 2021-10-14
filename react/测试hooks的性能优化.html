@@ -1,0 +1,80 @@
+<!--
+ * @Author       : helishou
+ * @Date         : 2021-08-10 11:35:25
+ * @LastEditTime : 2021-09-18 18:28:37
+ * @LastEditors  : helishou
+ * @Description  : 
+ * @FilePath     : \print\practice\react\测试hooks的性能优化.html
+ * 你用你的指尖,阻止我说再见,在bug完全失去之前
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>类式组件</title>
+    <style>
+      .title {
+        background-color: orange;
+        width: 200px;
+      }
+    </style>
+  </head>
+  <body>
+    <!--  准备好一个容器-->
+    <div id="test"></div>
+    <!-- 引入react核心库 -->
+    <script type="text/javascript" src="./js/react.development.js"></script>
+    <!-- 引入react dom 用于支持react 操作dom -->
+    <script type="text/javascript" src="./js/react-dom.development.js"></script>
+    <!-- 引入babel 用于将jsx转化为js -->
+    <script type="text/javascript" src="./js/babel.min.js"></script>
+
+    <script type="text/babel">
+      // 2.创建子组件
+      // function Children1() {
+      //   console.log("我是1");
+      //   return <div>子组件1</div>;
+      // }
+      //子组件有用
+      const Children1=React.memo(()=> {
+        console.log("我是1");
+        return <div>子组件1</div>;
+      })
+      function Children2(props) {
+        console.log("我是2");
+        return <div>子组件2{props.value}</div>;
+      }
+      //1.创建函数式式组件
+      // 父组件memo无用
+      const Weather = React.memo(() => {
+        const [state, setstate] = React.useState("6");
+        // React.useCallback无用
+        const NewChildren1 = React.useCallback(Children1, []);
+        return (
+          <div>
+            <Children1 />
+            <NewChildren1 />
+            <Children2 value={state} />
+            <button
+              onClick={() => {
+                setstate(8);
+              }}
+            >
+              点我改状态
+            </button>
+          </div>
+        );
+      });
+
+      //2.渲染组件
+      ReactDOM.render(<Weather />, document.getElementById("test"));
+      /*
+          执行ReactDOM.render(<MyComponet/>.....之后,发生了什么
+            1.React 接信息组件标签,找到了MyComponent组件
+            2.发现组件是使用类定义的,随后创建该类实例,并通过该实例调用到原型上的render方法.
+            3.将rendr返回的虚拟DOM转为真实DOM,随后呈现在页面中
+        */
+    </script>
+  </body>
+</html>

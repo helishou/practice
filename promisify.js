@@ -1,65 +1,51 @@
 /*
  * @Author       : helishou
- * @Date         : 2021-09-09 10:05:07
- * @LastEditTime : 2021-09-09 10:44:34
+ * @Date         : 2021-09-18 09:11:40
+ * @LastEditTime : 2021-10-14 14:27:50
  * @LastEditors  : helishou
- * @Description  : 
+ * @Description  :
  * @FilePath     : d:\desk\sakura\practice\promisify.js
  * 你用你的指尖,阻止我说再见,在bug完全失去之前
  */
-const kCustomPromisifiedSymbol = Symbol('nodejs.util.promisify.custom');
-const kCustomPromisifyArgsSymbol = Symbol('customPromisifyArgs');
-
-let validateFunction;
-
-function promisify(original) {
-  const argumentNames = original[kCustomPromisifyArgsSymbol];
-
-  function fn(...args) {
+const promisify = (fnc,ctx) => {
+  return function (...arg) {
+    var that = ctx||this;
     return new Promise((resolve, reject) => {
-      ArrayPrototypePush(args, (err, ...values) => {
+      arg.push((err, ...result) => {
         if (err) {
-          return reject(err);
-        }
-        if (argumentNames !== undefined && values.length > 1) {
-          const obj = {};
-          for (let i = 0; i < argumentNames.length; i++)
-            obj[argumentNames[i]] = values[i];
-          resolve(obj);
+          reject(err);
         } else {
-          resolve(values[0]);
+          resolve(result);
         }
       });
-      ReflectApply(original, this, args);
+      fnc.apply(that, arg);
     });
-  }
+  };
+};
 
-  ObjectSetPrototypeOf(fn, ObjectGetPrototypeOf(original));
+const calb = (a, b) => {
+  setTimeout(() => {
+    try {
+    //   console.log(a);
+      b(undefined, a);
+    } catch (e) {
+      b(e);
+    }
+  }, 2000);
+};
+console.time('callback')
+calb('1',(err,result)=>{
+    console.log('输出结果',err,result)
+    console.timeEnd('callback')
+})
 
-  ObjectDefineProperty(fn, kCustomPromisifiedSymbol, {
-    value: fn, enumerable: false, writable: false, configurable: true
+console.time("promsify");
+let p = promisify(calb);
+p("pppp1")
+  .then((a) => {
+    console.log(a);
+    console.timeEnd("promsify");
+  })
+  .catch((e) => {
+    console.log("出错了");
   });
-  return ObjectDefineProperties(
-    fn,
-    ObjectGetOwnPropertyDescriptors(original)
-  );
-}
-
-promisify.custom = kCustomPromisifiedSymbol;
-// function promisify(fnc,that) {
-//     return function (...args) {
-//         var that=that||this
-//         return new Promise((resolve, reject) => {
-//             fnc.call(that, ...args, (err, res) => {
-//                 if (err) {
-//                     reject(err)
-//                 } else {
-//                     resolve(res)
-//                 }
-//             })
-//         })
-//     }
-// }
-const fn=(item)=>console.log(item)
-const fn2=promisify(fn)
-fn2(333333).then()

@@ -1,0 +1,43 @@
+<!--
+ * @Author       : helishou
+ * @Date         : 2021-10-12 23:31:10
+ * @LastEditTime : 2021-10-12 23:45:20
+ * @LastEditors  : helishou
+ * @Description  : 
+ * @FilePath     : \Vue\12.列表渲染\7.模拟一个数据监测.html
+ * 你用你的指尖,阻止我说再见,在bug完全失去之前
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let date = {
+        name:{
+            tw:{
+                name:'尚硅谷'
+            }
+        },
+        age:6
+      };
+      let proxyDate=new Proxy(date,{
+          set(value,protety,newValue){
+            console.log(protety,newValue)
+            date[protety]=newValue
+          }
+      })
+      //不行
+      proxyDate.name.tw.name='6666'
+      //可以
+      proxyDate.age =9
+      //
+      proxyDate.age =9
+      console.log(proxyDate)
+    </script>
+  </body>
+</html>

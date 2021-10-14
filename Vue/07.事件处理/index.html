@@ -1,0 +1,76 @@
+<!--
+ * @Author       : helishou
+ * @Date         : 2021-09-07 22:20:10
+ * @LastEditTime : 2021-09-14 00:09:32
+ * @LastEditors  : helishou
+ * @Description  : 
+ * @FilePath     : \Vue\07.事件处理\index.html
+ * 你用你的指尖,阻止我说再见,在bug完全失去之前
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue事件修饰符</title>
+    <!-- 引入Vue -->
+    <script type="text/javascript" src="../js/vue.js"></script>
+  </head>
+  <body>
+    <!-- 
+        Vue事件修饰符
+        1.prevent 阻止默认事件
+        2.stop  阻止事件冒泡
+        3.once 只触发一次
+        4.capture 捕获模式
+        5.self 只有event.target是当前操作的元素才触发事件
+        6.passive 事件默认立即执行，无需等待回调
+     -->
+    <!-- 准备好容器 -->
+    <div id="root">
+      <h1>Hello,{{_data.name}},{{_data.age}}</h1>
+      <input v-model="name" />
+      <div @click.capture='click(1111,$event)'>
+      <button @click='click(6666,$event)'>点我提醒信息，捕获</button>
+      </div>
+      <div @click.self.capture='click(3333,$event)'>
+      <button @click='click(4444,$event)'>点我提醒信息,self</button>
+      </div>
+      <button @click.once='click(6666,$event)'>只触发一次</button>
+      <li style="height:200px;overflow:scroll" @wheel.passive='demo'>
+        <ul>1</ul>
+        <ul>2</ul>
+        <ul>3</ul>
+        <ul>4</ul>
+        <ul>5</ul>
+      </li>
+    </div>
+    <script>
+      // 将_data数据代理到vm实例上
+      const vm = new Vue({
+        data() {
+          return {
+            name: "WXY",
+            age: "24",
+            url: '"https://wangxinyang.xyz"',
+          };
+        },
+        methods: {
+          click(number,event) {
+            console.log(number)
+            console.log(event.target.innerText);
+            
+          },
+          demo(){
+            for(let i =0;i<10000;i++){
+              console.log('#')
+            }
+            console.log('累坏了')
+          }
+        },
+      });
+      vm.$mount("#root"); //第二章写法
+    </script>
+  </body>
+</html>

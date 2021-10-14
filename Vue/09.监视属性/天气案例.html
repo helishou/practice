@@ -1,0 +1,59 @@
+
+<!--
+ * @Author       : helishou
+ * @Date         : 2021-09-14 18:43:36
+ * @LastEditTime : 2021-09-14 23:31:08
+ * @LastEditors  : helishou
+ * @Description  : 
+ * @FilePath     : \Vue\09.监视属性\天气案例.html
+ * 你用你的指尖,阻止我说再见,在bug完全失去之前
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>切换天气</title>
+    <!-- 引入Vue -->
+    <style></style>
+    <script type="text/javascript" src="../js/vue.js"></script>
+  </head>
+  <body>
+    <!-- 
+        Vue事件修饰符
+        1.prevent 阻止默认事件
+        2.stop  阻止事件冒泡
+        3.once 只触发一次
+        4.capture 捕获模式
+        5.self 只有event.target是当前操作的元素才触发事件
+        6.passive 事件默认立即执行，无需等待回调
+     -->
+    <!-- 准备好容器 -->
+    <div id="root">
+      <h2>今天天气真{{weather}}</h2>
+      <button @click='click'>切换天气</button>
+    </div>
+    <script>
+      // 将_data数据代理到vm实例上
+      const vm = new Vue({
+        data() {
+          return {
+            isHot: true,
+          };
+        },
+        computed: {
+          weather(){
+            return this.isHot?'炎热':'凉爽'
+          }
+        },
+        methods: {
+          click() {
+            this.isHot = !this.isHot;
+          },
+        },
+      });
+      vm.$mount("#root"); //第二章写法
+    </script>
+  </body>
+</html>
