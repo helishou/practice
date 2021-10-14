@@ -1,0 +1,56 @@
+<!--
+ * @Author       : helishou
+ * @Date         : 2021-10-12 23:58:19
+ * @LastEditTime : 2021-10-13 23:29:39
+ * @LastEditors  : helishou
+ * @Description  : 
+ * @FilePath     : \Vue\016.自定义指定\v-big.html
+ * 你用你的指尖,阻止我说再见,在bug完全失去之前
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>手机表单</title>
+    <!-- 引入Vue -->
+    <style>
+      .normal {
+        background-color: aqua;
+      }
+      .innormal {
+        background-color: blueviolet;
+      }
+    </style>
+    <script type="text/javascript" src="../js/vue.js"></script>
+  </head>
+  <body>
+    <!--v-pre 不编译了-->
+    <div id="root">
+      <h2>当前的n是<span v-text="n"></span></h2>
+      <h2>当前的n10倍是<span v-big="n"></span></h2>
+      <button @click="n++">点我n+1</button>
+    </div>
+    <script>
+      // 全局过滤器
+      const vm = new Vue({
+        data() {
+          return { n:1 };
+        },
+        methods: {
+          demo() {
+            console.log(this._data);
+          },
+        },
+        computed: {},
+        directives: {
+          big(element,binding){
+            element.innerText=binding.value*10
+          }
+        }
+      });
+      vm.$mount("#root"); //第二章写法
+    </script>
+  </body>
+</html>

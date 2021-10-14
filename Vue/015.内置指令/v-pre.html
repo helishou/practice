@@ -1,10 +1,10 @@
 <!--
  * @Author       : helishou
  * @Date         : 2021-10-12 23:58:19
- * @LastEditTime : 2021-10-13 22:48:56
+ * @LastEditTime : 2021-10-13 23:25:54
  * @LastEditors  : helishou
  * @Description  : 
- * @FilePath     : \Vue\014.过滤器\index.html
+ * @FilePath     : \Vue\015.内置指令\v-pre.html
  * 你用你的指尖,阻止我说再见,在bug完全失去之前
 -->
 <!DOCTYPE html>
@@ -26,16 +26,17 @@
     <script type="text/javascript" src="../js/vue.js"></script>
   </head>
   <body>
-    <!--过滤器只能用茶插值和v-bind-->
-    <div id="root">{{time|timeFomatter|timeFomatter2|mySlice}}</div>
+    <!--v-pre 不编译了-->
+    <div id="root">
+      <h2>当前的n是<span v-text="n"></span></h2>
+      <h2>当前的n10倍是<span v-big="n"></span></h2>
+      <button @click="n++">点我n+1</button>
+    </div>
     <script>
       // 全局过滤器
-      Vue.filter("mySlice", function (value) {
-        return value.slice(0, 4);
-      });
       const vm = new Vue({
         data() {
-          return { time: 666666 };
+          return { n:1 };
         },
         methods: {
           demo() {
@@ -43,18 +44,11 @@
           },
         },
         computed: {},
-        filters: {
-          timeFomatter(value) {
-            console.log(value);
-            //dayjs
-            return "hello";
-          },
-          timeFomatter2(value) {
-            console.log(value);
-            //dayjs
-            return "hello2";
-          },
-        },
+        directives: {
+          big(element,binding){
+            element.innerText=binding.value*10
+          }
+        }
       });
       vm.$mount("#root"); //第二章写法
     </script>

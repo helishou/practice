@@ -1,0 +1,86 @@
+<!--
+ * @Author       : helishou
+ * @Date         : 2021-10-12 23:58:19
+ * @LastEditTime : 2021-10-14 23:03:28
+ * @LastEditors  : helishou
+ * @Description  : 
+ * @FilePath     : \Vue\016.自定义指定\v-fbind.html
+ * 你用你的指尖,阻止我说再见,在bug完全失去之前
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>手机表单</title>
+    <!-- 引入Vue -->
+    <style>
+      .normal {
+        background-color: aqua;
+      }
+      .innormal {
+        background-color: blueviolet;
+      }
+    </style>
+    <script type="text/javascript" src="../js/vue.js"></script>
+  </head>
+  <body>
+    <!--v-pre 不编译了-->
+    <div id="root">
+      <h2>当前的n是<span v-text="n"></span></h2>
+      <h2>当前的n10倍是<span v-big="n"></span></h2>
+      <button @click="n++">点我n+1</button>
+      <input type="text" v-fbind="n" />
+    </div>
+    <script>
+/*       全局指令
+Vue.directive('VFbind', {
+        bind(el, binding, vnode) {},
+        inserted(el, binding, vnode) {},
+        update(el, binding, vnode, oldVnode) {},
+        componentUpdated(el, binding, vnode) {},
+        unbind(el, binding, vnode) {},
+      }); */
+      // fbind自动focus
+      const vm = new Vue({
+        data() {
+          return { n: 1 };
+        },
+        methods: {
+          demo() {
+            console.log(this._data);
+          },
+        },
+        computed: {},
+        //指令与元素成功绑定时候会调用自定义指令
+        directives: {
+          big(element, binding) {
+            element.innerText = binding.value * 10;
+          },
+          /*           fbind(element,binding){
+            element.value=binding.value
+            element.focus()//无效
+          } */
+          'fbind': {
+            //绑定时候
+            bind(element, binding) {
+              console.log(this)//window
+              element.value = binding.value;
+            },
+            //插入页面时候
+            inserted(element, binding) {
+              element.focus();
+            },
+            //更新时候
+            update(element, binding) {
+              element.value = binding.value;
+              element.focus();
+            },
+          },
+        },
+      });
+      vm.$mount("#root"); //第二章写法
+    </script>
+  </body>
+</html>

