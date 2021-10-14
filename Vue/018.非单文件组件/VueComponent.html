@@ -1,0 +1,61 @@
+<!--
+ * @Author       : helishou
+ * @Date         : 2021-10-14 23:24:32
+ * @LastEditTime : 2021-10-15 00:12:35
+ * @LastEditors  : helishou
+ * @Description  : 
+ * @FilePath     : \Vue\018.非单文件组件\VueComponent.html
+ * 你用你的指尖,阻止我说再见,在bug完全失去之前
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+  </head>
+  <body>
+    <div id="root">
+      <school></school>
+    </div>
+  </body>
+  <script>
+    /* 组件方法的this都是指向vueComponent
+    实例this指向Vue */
+    const student = Vue.extend({
+      template: `<div><h1>学生名称:{{name}}</h1><h1>学生年龄:{{age}}</h1></div>`,
+      data() {
+        return {
+          name: "胡宏洋",
+          age: "19",
+        };
+      },
+    });
+    console.log(student)
+    /* 构造函数
+    ƒ VueComponent (options) {
+        this._init(options);
+      } */
+    const school = Vue.extend({
+      template: `<div><h1>学校名称:{{schoolName}}</h1><h1>学校地址:{{address}}</h1>      <hr /><student></student></div>`,
+      data() {
+        return {
+          schoolName: "尚硅谷",
+          address: "北京昌平",
+        };
+      },
+      components: {
+        student,
+      },
+    });
+
+    new Vue({
+      el: "#root",
+      components: {
+        school,
+      },
+    });
+  </script>
+</html>
