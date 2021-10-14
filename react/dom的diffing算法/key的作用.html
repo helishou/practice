@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .list{
+            width: 200px;
+            height: 150px;
+            background-color: skyblue;
+            overflow: auto;
+        }
+        .news{
+            height: 30px;
+
+        }
+    </style>
+</head>
+
+<body>
+    <!--  准备好一个容器-->
+    <div id="test"></div>
+    <!-- 引入react核心库 -->
+    <script type="text/javascript" src="../新版本/react.development.js"></script>
+    <!-- 引入react dom 用于支持react 操作dom -->
+    <script type="text/javascript" src="../新版本/react-dom.development.js"></script>
+    <!-- 引入babel 用于将jsx转化为js -->
+    <script type="text/javascript" src="../新版本/babel.min.js"></script>
+    <script type="text/babel">
+    /*慢动作回放---使用index索引值作为key
+    {id:2,name:'小离',age:19}
+    {id:1,name:'小张',age:18}
+    初始虚拟dom
+    {key:2,name:'小离',age:19}
+    {key:1,name:'小张',age:18}
+
+    更新后
+    {id:3,name:'小王',age:20}
+    {id:2,name:'小离',age:19}
+    {id:1,name:'小张',age:18}    
+    更新后的虚拟dom
+    {key:0,name:'小王',age:20}
+    {key:1,name:'小离',age:19}
+    {key:2,name:'小张',age:18}
+
+    ----用唯一标识name做key
+        {id:2,name:'小离',age:19}
+    {id:1,name:'小张',age:18}
+    初始虚拟dom
+    {key:小李,name:'小离',age:19}
+    {key:嚣张,name:'小张',age:18}
+
+    更新后
+    {id:3,name:'小王',age:20}
+    {id:2,name:'小离',age:19}
+    {id:1,name:'小张',age:18}    
+    更新后的虚拟dom
+    {key:小王,name:'小王',age:20}
+    {key:小李,name:'小离',age:19}
+    {key:小张,name:'小张',age:18}
+
+    */
+        class Person extends React.Component{
+            state={persons:[{id:1,name:'小张',age:18},{id:2,name:'小离',age:19}]}
+            add = () =>{
+                const{persons}=this.state
+                const p = {id:persons.length+1,name:'小王',age:20}
+
+                this.setState({persons:[p,...persons]})
+
+            }
+            
+            render(){
+                return(
+                    <div>
+                        <h2>展示人员信息</h2>
+                        <button onClick={this.add}>+1</button>
+                    <ul>
+                        {
+                            this.state.persons.map((personobj)=>{
+                                return <li key={personobj.name}> 姓名:{personobj.name}----
+                                    年龄:{personobj.age}<input type="text"/></li>
+                            })
+                        }
+                    </ul>
+
+                    <hr/>
+                    <hr/>
+                    <hr/>
+                    <h3>用index作为唯一标识</h3>
+                    <ul>
+                        {
+                            this.state.persons.map((personobj,index)=>{
+                                return <li key={index}> 姓名:{personobj.name}----
+                                    年龄:{personobj.age}<input type="text"/></li>
+                            })
+                        }
+                    </ul>
+                    </div>
+                )
+            }
+        }
+        ReactDOM.render(<Person/>,document.getElementById('test'))
+    </script>
+
+</body>
+
+</html>

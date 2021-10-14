@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>类式组件</title>
+    <style>
+      .title {
+        background-color: orange;
+        width: 200px;
+      }
+    </style>
+  </head>
+  <body>
+    <!--  准备好一个容器-->
+    <div id="test"></div>
+    <!-- 引入react核心库 -->
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <!-- 引入react dom 用于支持react 操作dom -->
+    <script
+      type="text/javascript"
+      src="../js/react-dom.development.js"
+    ></script>
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+
+    <script type="text/babel">
+      class Weather extends React.Component {
+        // constructor(props) {
+        //   super(props);
+        //   this.state = { isHot: false, wind: "大风" };
+        //   // this.changeWeather = this.changeWeather.bind(this)
+        // // }
+        state = { isHot: false, wind: "大风" };
+        render() {
+          // const { isHot } = this.state;
+          // const { wind } = this.state;
+          const { isHot,wind } = this.state;
+          return (
+            <h1 onClick={this.changeWeather}>
+              今天天气很{isHot ? "炎热" : "凉爽"},今天有{wind}
+            </h1>
+          );
+        }
+        //要用赋值语句的形式+箭头函数
+        changeWeather = () => {
+            console.log(this.state.isHot);
+            this.setState({isHot:!(this.state.isHot)})
+        }
+      }
+      ReactDOM.render(<Weather />, document.getElementById("test"));
+    </script>
+  </body>
+</html>

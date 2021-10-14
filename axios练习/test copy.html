@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <button onclick="testGet()">Get请求</button>
+      <button onclick="testPost()">POST请求</button>
+      <button onclick="testPut()">PUT请求</button>
+      <button onclick="testDelete()">DELETE请求</button>
+    </div>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <script>
+      axios.defaults.baseURL='http://localhost:3000'
+      function testGet(){
+          // axios.get('/posts').then(
+          //     response=>{
+          //         console.log('/posts',response.data)
+          //     }
+          //     )
+          axios({url:'/posts',method:'get'}).then(
+              response=>{
+                  console.log('/posts',response.data)
+              }
+              )
+      }
+      function testPost(){
+          axios.post('/posts',{ "id":3,"title": "json-server3", "author": "typicode3" }).then(
+              response=>{
+                  console.log('/posts',response.data)
+              }
+              )
+      }
+      function testPut(){
+          axios.put('/posts/3',{  "title": "json-1", "author": "111" }).then(
+              response=>{
+                  console.log('/posts',response.data)
+              }
+              )
+      }
+      function testDelete(){
+          axios({url:'/posts/10',method:'delete'}).then(
+              response=>{
+                  console.log('/posts',response.data)
+              }
+              )
+          // axios.delete('/posts/9').then(
+          //     response=>{
+          //         console.log('/posts',response.data)
+          //     }
+          //     )
+      }
+    </script>
+  </body>
+</html>

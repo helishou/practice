@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .list{
+            width: 200px;
+            height: 150px;
+            background-color: skyblue;
+            overflow: auto;
+        }
+        .news{
+            height: 30px;
+
+        }
+    </style>
+</head>
+
+<body>
+    <!--  准备好一个容器-->
+    <div id="test"></div>
+    <!-- 引入react核心库 -->
+    <script type="text/javascript" src="../新版本/react.development.js"></script>
+    <!-- 引入react dom 用于支持react 操作dom -->
+    <script type="text/javascript" src="../新版本/react-dom.development.js"></script>
+    <!-- 引入babel 用于将jsx转化为js -->
+    <script type="text/javascript" src="../新版本/babel.min.js"></script>
+    <script type="text/babel">
+        class Time extends React.Component{
+            state={date:new Date()}
+            componentDidMount(){
+                setInterval(()=>{
+                    this.setState({date:new Date()})
+                },1000)
+            }
+            
+            
+            render(){
+                return(
+                    <div  ref="list">
+                        <h1>Hell0</h1>
+                        <input type="text"/>
+                        <span><input type="text"/>现在是: {this.state.date.toTimeString()}</span>
+                    </div>
+                )
+            }
+        }
+        ReactDOM.render(<Time/>,document.getElementById('test'))
+    </script>
+
+</body>
+
+</html>

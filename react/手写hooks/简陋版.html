@@ -1,0 +1,73 @@
+<!--
+ * @Author       : helishou
+ * @Date         : 2021-07-10 23:59:34
+ * @LastEditTime : 2021-07-11 00:46:36
+ * @LastEditors  : helishou
+ * @Description  : 手写hooks
+ * @FilePath     : f:\桌面\front do\react第一次学习\手写hooks\简陋版.html
+ * 你用你的指尖,阻止我说再见,在bug完全失去之前
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>手写hooks</title>
+    <style>
+      .title {
+        background-color: orange;
+        width: 200px;
+      }
+    </style>
+  </head>
+  <body>
+    <!--  准备好一个容器-->
+    <div id="test"></div>
+    <!-- 引入react核心库 -->
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <!-- 引入react dom 用于支持react 操作dom -->
+    <script
+      type="text/javascript"
+      src="../js/react-dom.development.js"
+    ></script>
+    <!-- 引入babel 用于将jsx转化为js -->
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+
+    <script type="text/babel">
+      //1.创建函数式组件
+      let useStateDemo=(function(){
+        let stateValue
+        return function useState(initialValue){
+          stateValue=stateValue||initialValue
+          function setState(value){
+            if(typeof value==="function"){
+              stateValue= value()
+            }else{
+              stateValue= value
+            }
+            schedule()
+          }
+          return [stateValue,setState]
+        }
+      })() 
+      console.log([useStateDemo])
+      //定义组件
+      function App() {
+        console.log('render了')
+        let [count, setCount] = useStateDemo(10);
+        // let [age, setAge] = useStateDemo(10);
+        return (
+          <div>
+            <p>Clicked {count} times</p>
+            <button onClick={() => setCount(() => count + 1)}> Add count</button>
+          </div>
+        );
+      }
+      //渲染组件
+      function schedule(){
+        ReactDOM.render(<App />, document.getElementById("test"));
+      }
+      schedule()
+    </script>
+  </body>
+</html>

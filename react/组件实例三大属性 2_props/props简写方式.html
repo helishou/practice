@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>类式组件</title>
+  <style>
+    .title {
+      background-color: orange;
+      width: 200px;
+    }
+  </style>
+</head>
+
+<body>
+  <!--  准备好一个容器-->
+  <div id="test"></div>
+  <div id="test1"></div>
+  <div id="test2"></div>
+  <!-- 引入react核心库 -->
+  <script type="text/javascript" src="../js/react.development.js"></script>
+  <!-- 引入react dom 用于支持react 操作dom -->
+  <script type="text/javascript" src="../js/react-dom.development.js"></script>
+  <!-- 引入babel 用于将jsx转化为js -->
+  <script type="text/javascript" src="../js/babel.min.js"></script>
+  <!-- 引入prop-types 对组件标签属性进行限制 -->
+  <script type="text/javascript" src="../js/prop-types.js"></script>
+  <script type="text/babel">
+
+      //1.创建类式组件
+      class Person extends React.Component {
+        constructor(props){
+          //构造器是否接受props,是否传递给super,看在构造器用不用this访问props
+          //开发时候不写
+          console.log(props);
+          super(props)
+        }
+        static propTypes  ={
+          name:PropTypes.string, //限制name必传,且为字符串
+          sex:PropTypes.string,  //限制sex必传,且为字符串
+          age:PropTypes.number,  //限制age必传,且为数值
+          speak:PropTypes.func, //限制speak必传,且为函数
+        }
+        //指定默认的标签属性值
+        static defaultProps ={
+          sex:'不男不女',
+          age:18
+        }
+        render() {
+          console.log(this);
+          const { name,age,sex } = this.props;
+          return (
+            <ul>
+              <li>姓名: {name}</li>
+              <li>年龄: {age+1}</li>
+              <li>性别: {sex}</li>
+            </ul>
+          )
+        }
+      }
+      ReactDOM.render(<Person name="Jerry"/>, document.getElementById("test"));
+    </script>
+</body>
+
+</html>

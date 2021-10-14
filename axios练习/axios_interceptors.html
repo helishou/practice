@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <button onclick="testGet()">Get请求</button>
+      <button onclick="testPost()">POST请求</button>
+      <button onclick="testPut()">PUT请求</button>
+      <button onclick="testDelete()">DELETE请求</button>
+    </div>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.js"></script>
+    <script>
+      // axios.defaults.baseURL='http://localhost:3000'
+      const instance = axios.create({
+        baseURL: "http://localhost:3000",
+      });
+      //添加请求拦截器(回调函数)
+      instance.interceptors.request.use(
+        (config) => {
+          console.log("request interceptor1");
+          return config;
+        },
+        (error) => {
+          console.log("request error");
+          return Promise.reject(error);
+        }
+      );
+      instance.interceptors.response.use((response) => {
+        console.log("r");
+        return response;
+      },function(error){
+        console.log('response interceptor1 reject')
+        return response
+      });
+      instance.interceptors.request.use(
+        (config) => {
+          console.log("request interceptor2");
+          return config;
+        },
+        (error) => {
+          console.log("request error2");
+          return Promise.reject(error);
+        }
+      );
+      instance.interceptors.response.use((response) => {
+        console.log("r2");
+        return response;
+      });
+      function testGet() {
+        // axios.get('/posts').then(
+        //     response=>{
+        //         console.log('/posts',response.data)
+        //     }
+        //     )
+        instance({ url: "/posts", method: "get" })
+          .then((response) => {
+            console.log("/posts", response.data);
+          })
+          .catch((error) => {
+            console.log("error", error.message);
+          });
+      }
+      function testPost() {
+        instance
+          .post("/posts", { id: 3, title: "json-server3", author: "typicode3" })
+          .then((response) => {
+            console.log("/posts", response.data);
+          });
+      }
+      function testPut() {
+        instance
+          .put("/posts/3", { title: "json-1", author: "111" })
+          .then((response) => {
+            console.log("/posts", response.data);
+          });
+      }
+      function testDelete() {
+        instance({ url: "/posts/10", method: "delete" }).then((response) => {
+          console.log("/posts", response.data);
+        });
+        // axios.delete('/posts/9').then(
+        //     response=>{
+        //         console.log('/posts',response.data)
+        //     }
+        //     )
+      }
+    </script>
+  </body>
+</html>

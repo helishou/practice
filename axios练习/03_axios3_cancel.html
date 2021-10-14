@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>取消请求</title>
+  </head>
+  <body>
+    <button onclick="getProducts1()">获取商品列表1</button><br />
+    <button onclick="getProducts2()">获取商品列表2</button><br />
+    <button onclick="cancelReq()">取消请求</button><br />
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <script>
+      let cancel; //用于保存取消请求的函数
+      axios.defaults.baseURL = "http://localhost:4000";
+      function getProducts1() {
+        if (typeof cancel === "function") {
+          cancel("强制取消请求");
+        } else {
+          console.log("没有可取消的请求");
+        }
+        axios({
+          url: "/products1",
+          cancelToken: new axios.CancelToken((c) => {
+            cancel = c; //c是用于取消当前请求的函数
+          }),
+        }).then(
+          (Response) => {
+            console.log("请求1成功了", Response.data);
+          },
+          (error) => {
+            console.log("error", error.message);
+            if(axios.isCancel(error)){
+              // cancel=null
+              console.log('请求1取消的错误',error.message)
+            }else{//请求出错
+                cancel= null 
+                console.log('请求失败',error.message)
+            }
+            
+          },
+
+        );
+      }
+      function getProducts2() {
+        if (typeof cancel === "function") {
+          cancel("强制取消请求");
+        } else {
+          console.log("没有可取消的请求");
+        }
+        axios({
+          url: "/products2",
+          cancelToken: new axios.CancelToken((c) => {
+            cancel = c; //c是用于取消当前请求的函数
+          })
+        }).then((Response) => {
+          console.log("请求2成功了", Response.data);
+        },error=>{
+          console.log('error2',error.message)
+        });
+      }
+
+      function cancelReq() {
+        if (typeof cancel === "function") {
+          cancel("强制取消请求");
+        } else {
+          console.log("没有可取消的请求");
+        }
+      }
+    </script>
+  </body>
+</html>
