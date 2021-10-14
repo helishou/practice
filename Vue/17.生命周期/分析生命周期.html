@@ -1,0 +1,102 @@
+<!--
+ * @Author       : helishou
+ * @Date         : 2021-10-14 16:33:00
+ * @LastEditTime : 2021-10-14 21:12:30
+ * @LastEditors  : helishou
+ * @Description  : 
+ * @FilePath     : d:\desk\sakura\practice\Vue\17.生命周期\分析生命周期.html
+ * 你用你的指尖,阻止我说再见,在bug完全失去之前
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+  </head>
+  <body>
+    <div id="root">
+      <h1 :style="{opacity}">生命周期</h1>
+      <h1>{{n}}</h1>
+      <button @click="n++">点我加一</button>
+      <button @click="add">点我加一</button>
+      <button @click="stop">停止变换</button>
+      <button @click="bye">点我销毁</button>
+      <div v-once>{{change()}}</div>
+    </div>
+  </body>
+  <script>
+    new Vue({
+      el: "#root",
+      //容器可以用template
+      // template: `<h2>欢迎学习vue</h2>`,
+      data: {
+        opacity: 1,
+        n: 1,
+      },
+      methods: {
+        bye() {
+          //销毁了，页面还留着东西,而且留着原生事件，不留自定义时间
+          console.log("bye");
+          this.$destroy();
+        },
+        add() {
+          console.log("调用了add");
+          this.n++;
+        },
+        change() {
+          console.log(1);
+          console.log(this)
+          this.timer = setInterval(() => {
+            console.log('定时器')
+            this.opacity -= 0.01;
+            if (this.opacity <= 0) this.opacity = 1;
+          }, 16);
+        },
+        stop() {
+          console.log('stop')
+          clearInterval(this.timer);
+        },
+      },
+      //挂载流程
+      beforeCreate() {
+        //创建数据监测，数据代理之前
+        console.log("beforecreate");
+      },
+      created() {
+        //创建数据监测，数据代理之后
+        console.log("create");
+      },
+      //未经vue编译的dom结构，对dom的操作，最终都不生效
+      beforeMount() {
+        console.log("beforeMounted");
+      },
+      //vue完成模板解析并把真实dom元素放入页面后调用mounted
+      mounted() {
+        //重要！
+        console.log("mounted");
+        this.change();
+      },
+      //更新时候调用
+      beforeUpdate() {
+        //数据与页面未完成同步
+        console.log("beforeUpadate");
+      },
+      updated() {
+        console.log("updated");
+      },
+      //销毁时候调用的生命周期
+      beforeDestroy() {
+        //重要！解绑定时器等操作,不会触发页面更新
+        this.add();
+        this.stop()
+        console.log("beforeDestroyed");
+      },
+      destroyed() {
+        console.log("destroyed");
+      },
+    });
+  </script>
+</html>
